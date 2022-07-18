@@ -1,13 +1,13 @@
 package autoreconnect.config;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
+
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.CollapsibleObject;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
 
 import static java.util.Collections.emptyList;
 

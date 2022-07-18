@@ -1,12 +1,12 @@
 package autoreconnect.config;
 
+import java.lang.reflect.Field;
+import java.util.List;
+
 import me.shedaniel.clothconfig2.api.AbstractConfigListEntry;
 import me.shedaniel.clothconfig2.gui.entries.BaseListEntry;
 import me.shedaniel.clothconfig2.gui.entries.IntegerListEntry;
 import me.shedaniel.clothconfig2.gui.entries.IntegerListListEntry;
-
-import java.lang.reflect.Field;
-import java.util.List;
 
 public final class GuiTransformers {
     private GuiTransformers() { }

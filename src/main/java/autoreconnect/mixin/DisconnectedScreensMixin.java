@@ -1,5 +1,7 @@
 package autoreconnect.mixin;
 
+import java.util.concurrent.TimeUnit;
+
 import autoreconnect.AutoReconnect;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DisconnectedScreen;
@@ -14,8 +16,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.concurrent.TimeUnit;
 
 @Mixin({DisconnectedScreen.class, DisconnectedRealmsScreen.class})
 public class DisconnectedScreensMixin extends Screen {

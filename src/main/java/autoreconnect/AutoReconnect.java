@@ -1,5 +1,14 @@
 package autoreconnect;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.IntConsumer;
+
 import autoreconnect.config.GuiTransformers;
 import autoreconnect.config.ModConfig;
 import autoreconnect.reconnect.ReconnectHandler;
@@ -7,7 +16,6 @@ import autoreconnect.reconnect.SingleplayerReconnectHandler;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.gui.registry.GuiRegistry;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
-import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DisconnectedScreen;
 import net.minecraft.client.gui.screen.Screen;
@@ -16,14 +24,15 @@ import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
 import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.realms.gui.screen.RealmsMainScreen;
+import net.minecraftforge.client.ConfigGuiHandler;
+import net.minecraftforge.fml.IExtensionPoint;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.IntConsumer;
-
-public class AutoReconnect implements ClientModInitializer {
+@Mod("autoreconnect")
+public class AutoReconnect {
     public static final ScheduledExecutorService EXECUTOR_SERVICE = new ScheduledThreadPoolExecutor(1);
     private static AutoReconnect instance;
     private final AtomicReference<ScheduledFuture<?>> countdown = new AtomicReference<>(null);
@@ -33,9 +42,12 @@ public class AutoReconnect implements ClientModInitializer {
         ((ScheduledThreadPoolExecutor) EXECUTOR_SERVICE).setRemoveOnCancelPolicy(true);
     }
 
-    @Override
-    public void onInitializeClient() {
+    public AutoReconnect() {
         instance = this;
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onInitializeClient);
+    }
+
+    public void onInitializeClient(FMLClientSetupEvent event) {
         AutoConfig.register(ModConfig.class, JanksonConfigSerializer::new);
         GuiRegistry registry = AutoConfig.getGuiRegistry(ModConfig.class);
         registry.registerPredicateTransformer(
@@ -47,6 +59,8 @@ public class AutoReconnect implements ClientModInitializer {
             (guis, s, f, c, d, g) -> GuiTransformers.disableInsertInFront(guis),
             field -> List.class.isAssignableFrom(field.getType())
         );
+        ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> "autoreconnect", (remote, network) -> network));
+        ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () -> new ConfigGuiHandler.ConfigGuiFactory((mc, parent) -> AutoConfig.getConfigScreen(ModConfig.class, parent).get()));
     }
 
     public static AutoReconnect getInstance() {

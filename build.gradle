@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.11-SNAPSHOT'
+    id 'dev.architectury.loom' version '0.12.0-SNAPSHOT'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -20,14 +20,24 @@ repositories {
 }
 
 dependencies {
+    forge "net.minecraftforge:forge:1.18.2-40.1.0"
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    //modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
+    //modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    //modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    modApi("me.shedaniel.cloth:cloth-config-forge:${project.cloth_config_version}") {
+    //    exclude(group: "net.fabricmc.fabric-api")
+        exclude(module: "gson")
+    }
+}
+
+loom {
+    forge {
+        mixinConfigs = [
+            "autoreconnect.mixins.json"
+        ]
     }
 }
 
@@ -56,5 +66,16 @@ java {
 jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
+    }
+    manifest {
+        attributes([
+                "Specification-Title"     : project.mod_id,
+                "Specification-Vendor"    : "Bstn1802",
+                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Implementation-Title"    : project.mod_name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : "Bstn1802",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
     }
 }

@@ -1,7 +1,8 @@
-# AutoReconnect [1.18.x][Fabric][Client]
+# AutoReconnect [1.18.x][Forge][Client]
 
 ### Description
 
+**This is an unofficial port for [AutoReconnect Fabric Edition](https://www.curseforge.com/minecraft/mc-mods/autoreconnect).**  
 This mod will automatically try to reconnect you back to a server if you got disconnected.
 By default, it will make 4 attempts after 3, 10, 30 and 60 seconds.
 
@@ -22,28 +23,15 @@ By default, it will make 4 attempts after 3, 10, 30 and 60 seconds.
   * Only executed after automatic reconnects and not if you reconnect manually or if it hasn't even been a reconnect
 * Works for Multiplayer, Realms and even for Singleplayer!
 * Extras
-  * In-game configuration through [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu) 
-  * Support [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu) and [AuthMe](https://www.curseforge.com/minecraft/mc-mods/auth-me) (for details see below) 
   * Disconnect Screen (like many other screens) can be exited by pressing escape
   * After being disconnected from a singleplayer world, you won't end up on the Multiplayer Screen ([Bug MC-46502](https://bugs.mojang.com/browse/MC-45602)) 
 
 ### Installation
 
-1. Download and install [Fabric](https://fabricmc.net/use/) and set up the profile the way you want
+1. Download and install [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.18.2.html) and set up the profile the way you want
 2. Download the following mods and put them in the mod folder:
-   * [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
    * [ClothConfig](https://www.curseforge.com/minecraft/mc-mods/cloth-config)
-   * [AutoReconnect](https://www.curseforge.com/minecraft/mc-mods/autoreconnect)
-   * [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu) (Optional but highly recommended)
-
-### Compatibility/Support
-
-* [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu)
-  * Properly shows the mod icon, name and author
-  and provides a link for the curseforge project page and the github issues page
-  * Graphical user interface to configure the mod in-game
-* [AuthMe](https://www.curseforge.com/minecraft/mc-mods/auth-me)
-  * Countdown for automatic reconnect will stop if you're re-authenticating to revalidate your session
+   * [AutoReconnect](https://www.curseforge.com/minecraft/mc-mods/autoreconnect-forge)
 
 ### Details
 
@@ -65,8 +53,8 @@ By default, it will make 4 attempts after 3, 10, 30 and 60 seconds.
 
 ### Feedback, Suggestions, Bugs & Issues
 
-* For feedback and suggestions please write a comment on [curseforge](https://www.curseforge.com/minecraft/mc-mods/autoreconnect)
-* If you found a bug or an issue, write a comment on [curseforge](https://www.curseforge.com/minecraft/mc-mods/autoreconnect) or open an issue on [github](https://github.com/Bstn1802/AutoReconnect/issues). Make sure to give a detailed description of the issue and post the latest logs, or a potential crash report, preferably by using something like [pastebin](https://pastebin.com/).
+* For feedback and suggestions please write a comment on [curseforge](https://www.curseforge.com/minecraft/mc-mods/autoreconnect-forge)
+* If you found a bug or an issue, write a comment on [curseforge](https://www.curseforge.com/minecraft/mc-mods/autoreconnect-forge) or open an issue on [github](https://github.com/ZekerZhayard/AutoReconnect/issues). Make sure to give a detailed description of the issue and post the latest logs, or a potential crash report, preferably by using something like [pastebin](https://pastebin.com/).
 
 ### Screenshots
 
