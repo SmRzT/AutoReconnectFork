@@ -1,17 +1,17 @@
 modLoader="javafml"
-loaderVersion="[38,)"
+loaderVersion="[39,)"
 license="CC0-1.0"
-issueTrackerURL="https://github.com/Bstn1802/AutoReconnect/issues"
+issueTrackerURL="https://github.com/ZekerZhayard/AutoReconnect/issues"
 
 [[mods]]
 modId="autoreconnect"
 version="${file.jarVersion}"
 displayName="AutoReconnet"
 #updateJSONURL="https://change.me.example.invalid/updates.json"
-displayURL="https://www.curseforge.com/minecraft/mc-mods/autoreconnect"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/autoreconnect-forge"
 logoFile="icon16.png"
 #credits="Thanks for this example mod goes to Java"
-authors="Bstn1802"
+authors="Bstn1802, ZekerZhayard"
 description='''
 This mod will automatically try to reconnect you back to a server if you got disconnected.
 By default, it will make 4 attempts after 3, 10, 30 and 60 seconds.
@@ -20,14 +20,14 @@ By default, it will make 4 attempts after 3, 10, 30 and 60 seconds.
 [[dependencies.autoreconnect]]
 modId="forge"
 mandatory=true
-versionRange="[38.0,41.0)"
+versionRange="[39.0,41.0)"
 ordering="NONE"
 side="CLIENT"
 
 [[dependencies.autoreconnect]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.18,1.19)"
+versionRange="[1.18.1,1.19)"
 ordering="NONE"
 side="CLIENT"
 

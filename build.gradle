@@ -1,5 +1,6 @@
 plugins {
     id 'dev.architectury.loom' version '0.12.0-SNAPSHOT'
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -20,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:1.18.2-40.1.0"
+    forge "net.minecraftforge:forge:${project.forge_version}"
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     //modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
@@ -70,12 +71,36 @@ jar {
     manifest {
         attributes([
                 "Specification-Title"     : project.mod_id,
-                "Specification-Vendor"    : "Bstn1802",
+                "Specification-Vendor"    : "Bstn1802, ZekerZhayard",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.mod_name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "Bstn1802",
+                "Implementation-Vendor"   : "Bstn1802, ZekerZhayard",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
+    }
+}
+
+import com.matthewprenger.cursegradle.CurseArtifact
+import com.matthewprenger.cursegradle.CurseUploadTask
+
+def apiKey = System.getenv("CURSEFORGE_API_KEY") ?: findProperty("curseforge.api.key")
+
+// We don’t use the task provided by the plugin because it adds some dependencies that we don’t need.
+tasks.create(name: "publishCurseForge", type: CurseUploadTask) { task ->
+    onlyIf {
+        apiKey != null
+    }
+
+    task.apiKey = apiKey
+    projectId = "646159"
+    mainArtifact = new CurseArtifact().with {
+        artifact = tasks.jar
+        gameVersionStrings = ["Forge", "Java 17", "1.18.1", "1.18.2"]
+        changelogType = "text"
+        changelog = ""
+        displayName = "${archivesBaseName}-${version}"
+        releaseType = "release"
+        it
     }
 }
