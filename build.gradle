@@ -103,4 +103,5 @@ tasks.create(name: "publishCurseForge", type: CurseUploadTask) { task ->
         releaseType = "release"
         it
     }
+    additionalArtifacts = []
 }
