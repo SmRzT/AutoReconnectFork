@@ -24,7 +24,8 @@ import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
 import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.realms.gui.screen.RealmsMainScreen;
-import net.minecraftforge.client.ConfigGuiHandler;
+//import net.minecraftforge.client.ConfigGuiHandler;
+import net.minecraft.text.Text;
 import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -60,7 +61,7 @@ public class AutoReconnect {
             field -> List.class.isAssignableFrom(field.getType())
         );
         ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> "autoreconnect", (remote, network) -> network));
-        ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () -> new ConfigGuiHandler.ConfigGuiFactory((mc, parent) -> AutoConfig.getConfigScreen(ModConfig.class, parent).get()));
+//        ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () -> new ConfigGuiHandler.ConfigGuiFactory((mc, parent) -> AutoConfig.getConfigScreen(ModConfig.class, parent).get()));
     }
 
     public static AutoReconnect getInstance() {
@@ -147,7 +148,7 @@ public class AutoReconnect {
         // wait first for initial delay
         EXECUTOR_SERVICE.schedule(
             () -> {
-                player.sendChatMessage(messages.next());
+                player.sendMessage(Text.of(messages.next()), false);
                 sendMessages(player, messages);
             },
             getConfig().getAutoMessages().getDelay(),

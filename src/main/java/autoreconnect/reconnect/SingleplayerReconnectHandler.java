@@ -1,9 +1,10 @@
 package autoreconnect.reconnect;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.SaveLevelScreen;
+import net.minecraft.client.gui.screen.LevelLoadingScreen;
 import net.minecraft.client.gui.screen.world.WorldListWidget;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
+
 
 public class SingleplayerReconnectHandler extends ReconnectHandler {
     private final String worldName;
@@ -24,8 +25,8 @@ public class SingleplayerReconnectHandler extends ReconnectHandler {
     @Override
     public void reconnect() {
         MinecraftClient client = MinecraftClient.getInstance();
-        if (!client.getLevelStorage().levelExists(getName())) return;
-        client.setScreenAndRender(new SaveLevelScreen(new TranslatableText("selectWorld.data_read")));
-        client.startIntegratedServer(getName());
+//        if (!client.getLevelStorage().levelExists(getName())) return;
+//        client.setScreenAndRender(new LevelLoadingScreen(Text.translatable("selectWorld.data_read")));
+//        client.startIntegratedServer(getName());
     }
 }
